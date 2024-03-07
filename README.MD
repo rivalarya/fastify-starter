@@ -1,0 +1,1 @@
+1. Add the new file ```config.json``` to the parent directory and insert the content the same as '''config.example.json'''.
