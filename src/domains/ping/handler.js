@@ -1,7 +1,6 @@
-const InvariantError = require("../../exceptions/InvariantError")
-const standarResponse = require("../standarResponse")
+const standarResponse = require('../standarResponse')
 
-async function getPing(request, reply) {
+async function getPing (request, reply) {
   const response = {
     ...standarResponse,
     message: 'Pong'
@@ -9,7 +8,6 @@ async function getPing(request, reply) {
 
   reply.send(response)
 }
-
 
 module.exports = {
   getPing
