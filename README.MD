@@ -1,1 +1,2 @@
 1. Add the new file ```config.json``` to the parent directory and insert the content the same as '''config.example.json'''.
+2. If you want to create a new domain, you should register the routes in ```main.js```
