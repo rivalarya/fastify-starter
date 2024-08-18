@@ -6,13 +6,32 @@ const config = require('../config.json')
 /**
  * By default, coerceTypes: true. It means that if you create a request validation, for example: {id: { type: 'string' }} and the user passes the id as an integer, the framework will not return an error but will cast the integer to a string. But if you set coerceTypes: false, it will return an error. https://fastify.dev/docs/latest/Reference/Validation-and-Serialization/#validator-compiler
  */
-// const Ajv = require('ajv')
-// const ajv = new Ajv({
-//   coerceTypes: false,
-// })
-// fastify.setValidatorCompiler(({ schema, method, url, httpPart }) => {
-//   return ajv.compile(schema)
-// })
+const Ajv = require('ajv')
+const ajv = new Ajv({
+  coerceTypes: false
+})
+fastify.setValidatorCompiler(({ schema, method, url, httpPart }) => {
+  return ajv.compile(schema)
+})
+
+fastify.setErrorHandler(function (error, request, reply) {
+  const statusCode = error.statusCode
+  let response
+
+  const { validation, validationContext } = error
+
+  if (validation) {
+    response = {
+      statusCode: 400,
+      message: `A validation error occurred when validating the ${validationContext}...`,
+      data: validation
+    }
+  } else {
+    throw error
+  }
+
+  reply.status(statusCode).send(response)
+})
 
 const cors = require('@fastify/cors')
 const AuthorizationError = require('./exceptions/AuthorizationError')
