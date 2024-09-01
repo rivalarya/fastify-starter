@@ -11,7 +11,10 @@ const fastify = require('fastify')({
 const config = require('../config.json')
 
 const RateLimiter = require('./middlewares/RateLimiter');
+const CORS = require('./middlewares/CORS');
+
 RateLimiter(fastify)
+CORS(fastify)
 
 fastify.setErrorHandler(function (error, request, reply) {
   const statusCode = error.statusCode
@@ -32,25 +35,7 @@ fastify.setErrorHandler(function (error, request, reply) {
   reply.status(statusCode).send(response)
 })
 
-const cors = require('@fastify/cors')
-const AuthorizationError = require('./exceptions/AuthorizationError')
-fastify.register(cors, {
-  origin: (origin, cb) => {
-    if (config.ENABLE_CORS === false) {
-      cb(null, true)
-      return
-    }
-
-    if (config.ALLOWED_ORIGIN.includes(origin)) {
-      cb(null, true)
-      return
-    }
-
-    cb(new AuthorizationError('Not allowed'))
-  }
-})
-
-const pingDomain = require('./domains/ping/routes')
+const pingDomain = require('./domains/ping/routes');
 
 fastify.register(pingDomain.routes, pingDomain.options)
 
