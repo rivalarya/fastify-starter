@@ -10,6 +10,9 @@ const fastify = require('fastify')({
 })
 const config = require('../config.json')
 
+const RateLimiter = require('./middlewares/RateLimiter');
+RateLimiter(fastify)
+
 fastify.setErrorHandler(function (error, request, reply) {
   const statusCode = error.statusCode
   let response
