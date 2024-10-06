@@ -31,8 +31,8 @@ const fastify = require('fastify')({
 })
 const config = require('../config.json')
 
-const RateLimiter = require('./middlewares/RateLimiter');
-const CORS = require('./middlewares/CORS');
+const RateLimiter = require('./middlewares/RateLimiter')
+const CORS = require('./middlewares/CORS')
 
 RateLimiter(fastify)
 CORS(fastify)
@@ -56,7 +56,7 @@ fastify.setErrorHandler(function (error, request, reply) {
   reply.status(statusCode).send(response)
 })
 
-const pingDomain = require('./domains/ping/routes');
+const pingDomain = require('./domains/ping/routes')
 
 fastify.register(pingDomain.routes, pingDomain.options)
 
