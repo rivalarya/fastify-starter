@@ -1,5 +1,26 @@
+// create folder logs and file http.log on pwd if dont exist
+const logFilePath = 'logs/http.log'
+const fs = require('fs')
+if (!fs.existsSync(logFilePath)) {
+  fs.mkdirSync('logs')
+  fs.writeFileSync(logFilePath, '')
+}
+
 const fastify = require('fastify')({
-  logger: true,
+  // reference: https://fastify.dev/docs/latest/Reference/Logging/#logging
+  logger: {
+    level: 'info',
+    file: 'logs/http.log',
+    serializers: {
+      req: (req) => {
+        return {
+          method: req.method,
+          url: req.url,
+          headers: req.headers
+        }
+      }
+    }
+  },
   ajv: {
     // reference: https://fastify.dev/docs/latest/Reference/Server/#ajv
     customOptions: {
