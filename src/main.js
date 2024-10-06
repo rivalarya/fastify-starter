@@ -61,3 +61,5 @@ const pingDomain = require('./domains/ping/routes')
 fastify.register(pingDomain.routes, pingDomain.options)
 
 fastify.listen({ port: config.PORT || 3000 })
+console.log(`Server listening on port ${config.PORT || 3000}`)
+
