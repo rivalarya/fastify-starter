@@ -1,0 +1,1 @@
+tambahkan branch untuk typescript version, setiap module menggunakan pluginAsync, refer penggunaannya ke projek screentive be versi typescript
