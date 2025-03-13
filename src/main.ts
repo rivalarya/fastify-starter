@@ -38,20 +38,24 @@ import CORS from './middlewares/CORS'
 RateLimiter(server)
 CORS(server)
 
+import IStandarResponse from './domains/standarResponse'
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
   const statusCode = error.statusCode || 500
-  let response
+  let response: IStandarResponse
 
   const { validation, validationContext } = error
 
   if (validation) {
     response = {
-      statusCode: 400,
       message: `A validation error occurred when validating the ${validationContext}...`,
       data: validation
     }
   } else {
-    throw error
+    response = {
+      message: error.message || error.name,
+      data: {}
+    }
+    return reply.status(statusCode).send(response)
   }
 
   reply.status(statusCode).send(response)

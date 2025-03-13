@@ -3,9 +3,8 @@ import IStandarResponse from '../standarResponse'
 
 async function getPing (request: FastifyRequest, reply: FastifyReply) {
   const response: IStandarResponse = {
-    statusCode: 200,
+    message: 'Pong',
     data: {},
-    message: 'Pong'
   }
 
   reply.send(response)

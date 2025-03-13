@@ -15,7 +15,6 @@ describe('Test /ping route with CORS enabled', () => {
       .expect('Content-Type', /json/)
 
     expect(response.body).toEqual({
-      statusCode: 403,
       error: "Forbidden",
       message: 'Not allowed'
     })
