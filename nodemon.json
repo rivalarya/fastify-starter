@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "ts",
+    "ignore": [
+        "src/**/*.test.ts",
+        "node_modules"
+    ],
+    "exec": "tsc -p tsconfig.json && node dist/src/main.js"
+}

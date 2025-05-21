@@ -2,3 +2,9 @@ node_modules
 package-lock.json
 config.json
 logs
+dist
+
+todo.txt
+.env
+.aidigestignore
+codebase.md
