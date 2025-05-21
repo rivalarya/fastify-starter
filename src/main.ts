@@ -8,7 +8,8 @@ if (!fs.existsSync(logFilePath)) {
 
 import fastify, { FastifyError, FastifyReply, FastifyRequest } from 'fastify'
 import { FastifyLoggerOptions } from 'fastify'
-import config from '../config.json'
+import config from './config/env'
+import { registerAllRoutes } from './utils/routeMapper'
 
 const server = fastify({
   logger: {
@@ -34,17 +35,18 @@ const server = fastify({
 
 import RateLimiter from './middlewares/RateLimiter'
 import CORS from './middlewares/CORS'
+import IStandarResponse from './domains/standarResponse'
 
+// Apply middlewares
 RateLimiter(server)
 CORS(server)
 
-import IStandarResponse from './domains/standarResponse'
+// Global error handler
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
   const statusCode = error.statusCode || 500
   let response: IStandarResponse
 
   const { validation, validationContext } = error
-
   if (validation) {
     response = {
       message: `A validation error occurred when validating the ${validationContext}...`,
@@ -61,21 +63,25 @@ server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: Fas
   reply.status(statusCode).send(response)
 })
 
-import pingDomain from './domains/ping/routes'
+// Auto-register all route modules
+registerAllRoutes(server)
+  .then(() => {
+    server.listen({
+      port: config.PORT,
+      host: '0.0.0.0'
+    }, (err: Error | null, address: string) => {
+      if (err) {
+        server.log.error(err)
+        process.exit(1)
+      }
 
-server.register(pingDomain, {prefix: '/'})
-
-server.listen({ 
-  port: config.PORT || 3000,
-  host: '0.0.0.0'
-}, (err: Error | null, address: string) => {
-  if (err) {
-    server.log.error(err)
+      server.log.info(`Server listening at ${address}`)
+      console.log(`Server listening at ${address}`)
+    })
+  })
+  .catch(err => {
+    server.log.error('Failed to register routes', err)
     process.exit(1)
-  }
-  server.log.info(`Server listening at ${address}`)
-  console.log(`Server listening at ${address}`)
-})
+  })
 
 export default server
-
