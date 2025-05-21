@@ -1,6 +1,6 @@
 import app from '../src/main'
 import request from 'supertest'
-import config from '../config.json'
+import config from '../src/config/env'
 
 describe('Test /ping route', () => {
   beforeAll(async () => {

@@ -5,3 +5,6 @@ logs
 dist
 
 todo.txt
+.env
+.aidigestignore
+codebase.md

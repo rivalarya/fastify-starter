@@ -1,5 +1,5 @@
 import cors from '@fastify/cors'
-import config from '../../config.json'
+import config from '../config/env'
 import { FastifyInstance } from 'fastify'
 import AuthorizationError from '../exceptions/AuthorizationError'
 
@@ -20,5 +20,3 @@ export default async function (fastify: FastifyInstance, opts: object = {}) {
     }
   })
 }
-
-
