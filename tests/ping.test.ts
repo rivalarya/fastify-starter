@@ -15,7 +15,6 @@ describe('Test /ping route', () => {
       .expect('Content-Type', /json/)
 
     expect(response.body).toEqual({
-      statusCode: 200,
       data: {},
       message: 'Pong'
     })

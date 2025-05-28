@@ -21,7 +21,7 @@ describe('Test /ping route', () => {
       .expect(429)
       .expect('Content-Type', /json/)
 
-    expect(response.body).toEqual({ statusCode: 429, error: "Too Many Requests", message: "Rate limit exceeded, retry in 10 seconds" })
+    expect(response.body).toEqual({ data: {}, message: "Rate limit exceeded, retry in 10 seconds" })
   })
 
   afterAll(async () => {

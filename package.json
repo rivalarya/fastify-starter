@@ -3,7 +3,9 @@
     "build": "tsc -p tsconfig.json",
     "start": "node src/main.js",
     "dev": "nodemon",
-    "lint-fix": "eslint --fix src tests"
+    "lint-fix": "eslint --fix src tests",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.0",

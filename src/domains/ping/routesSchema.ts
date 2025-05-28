@@ -4,7 +4,7 @@
  * Usage example in TypeScript.
  */
 
-import { FastifySchema } from 'fastify';
+import { FastifySchema } from 'fastify'
 
 export const getMessagesSchema: FastifySchema = {
   querystring: {
@@ -26,4 +26,4 @@ export const getMessagesSchema: FastifySchema = {
   //   },
   //   additionalProperties: false
   // }
-};
+}
