@@ -1,10 +1,13 @@
 import fastifyRateLimit from '@fastify/rate-limit'
 import AuthorizationError from '../exceptions/AuthorizationError'
 import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import config from '../config/env'
 
 const bannedIps = new Set<string>()
 
 export default async function (fastify: FastifyInstance, opts: object = {}) {
+  if (config.ENABLE_RATE_LIMITER === false) return
+
   const rateLimitConfig = {
     global: true,
     max: async (request: FastifyRequest, key: string): Promise<number> => {
