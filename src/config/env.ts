@@ -1,10 +1,11 @@
-import dotenv from 'dotenv'
+import dotenvSafe from 'dotenv-safe'
 import path from 'path'
 
 const envFile = process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
-dotenv.config({
+dotenvSafe.config({
   path: path.resolve(process.cwd(), envFile),
-  override: true
+  example: path.resolve(process.cwd(), '.env.example'),
+  allowEmptyValues: false
 })
 
 const defaultConfig = {
