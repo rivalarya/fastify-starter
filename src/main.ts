@@ -1,6 +1,8 @@
 // create folder logs and file http.log on pwd if dont exist
 import * as fs from 'fs'
+import mongoose from 'mongoose'
 const logFilePath = 'logs/http.log'
+
 if (!fs.existsSync(logFilePath)) {
   fs.mkdirSync('logs')
   fs.writeFileSync(logFilePath, '')
@@ -10,6 +12,13 @@ import fastify, { FastifyError, FastifyReply, FastifyRequest } from 'fastify'
 import { FastifyLoggerOptions } from 'fastify'
 import config from './config/env'
 import { registerAllRoutes } from './utils/routeMapper'
+
+mongoose.connect(config.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => {
+    console.error('MongoDB connection error:', err)
+    process.exit(1)
+  })
 
 const server = fastify({
   logger: {
@@ -33,13 +42,16 @@ const server = fastify({
   }
 })
 
+// Import and register middlewares
 import RateLimiter from './middlewares/RateLimiter'
 import CORS from './middlewares/CORS'
+import JWT from './middlewares/JWT'
 import IStandarResponse from './domains/standarResponse'
 
 // Apply middlewares
 RateLimiter(server)
 CORS(server)
+JWT(server)
 
 // Global error handler
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
