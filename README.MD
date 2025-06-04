@@ -137,3 +137,7 @@ npm test
 ## License
 
 This project is licensed under the MIT License.
+
+## TODO:
+
+- [ ] Should manually add labels `auto-merge` and `dependecies` to repo for auto-merge dependabot can successfully run. Make it automatic.
