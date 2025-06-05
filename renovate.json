@@ -2,17 +2,83 @@
   "extends": [
     "config:recommended"
   ],
+  "labels": [
+    "dependencies"
+  ],
   "automergeType": "pr",
+  "schedule": [
+    "before 6am on monday"
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": [
         "minor",
         "patch"
       ],
+      "matchCurrentVersion": "!/^0/",
       "automerge": true
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "Major Updates",
+      "automerge": false
+    },
+    {
+      "matchPackagePatterns": [
+        "^@types/"
+      ],
+      "groupName": "TypeScript definitions",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": [
+        "^@babel/",
+        "^babel-"
+      ],
+      "groupName": "Babel",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": [
+        "^eslint",
+        "^@typescript-eslint/"
+      ],
+      "groupName": "ESLint",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": [
+        "^jest",
+        "^@jest/",
+        "^@testing-library/"
+      ],
+      "groupName": "Testing",
+      "automerge": true
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": true
+    },
+    {
+      "matchDepTypes": [
+        "dependencies"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "matchCurrentVersion": "!/^0/",
+      "vulnerabilityAlerts": {
+        "automerge": true
+      }
     }
   ],
   "lockFileMaintenance": {
-    "enabled": true
-  }
+    "enabled": true,
+    "automerge": true
+  },
+  "timezone": "UTC"
 }
