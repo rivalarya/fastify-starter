@@ -7,7 +7,7 @@
   ],
   "automergeType": "pr",
   "schedule": [
-    "before 6am on monday on week 1,3 of month"
+    "0 0 1,15 * *"
   ],
   "packageRules": [
     {
