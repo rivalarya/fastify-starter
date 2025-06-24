@@ -27,9 +27,9 @@ export async function registerAllRoutes(fastify: FastifyInstance): Promise<void>
 
         await fastify.register(routeModule.default, { prefix: `/${domain === 'ping' ? '' : domain}` })
 
-        fastify.log.info(`Registered routes for domain: ${domain}`)
+        console.info(`Registered routes for domain: ${domain}`)
       } catch (error) {
-        fastify.log.error(`Failed to register routes for domain: ${domain}`, error)
+        console.error(`Failed to register routes for domain: ${domain}`, error)
       }
     }
   } catch (error) {
