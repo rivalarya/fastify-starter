@@ -26,36 +26,36 @@
       "automerge": false
     },
     {
-      "matchPackagePatterns": [
-        "^@types/"
-      ],
       "groupName": "TypeScript definitions",
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": [
+        "/^@types//"
+      ]
     },
     {
-      "matchPackagePatterns": [
-        "^@babel/",
-        "^babel-"
-      ],
       "groupName": "Babel",
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": [
+        "/^@babel//",
+        "/^babel-/"
+      ]
     },
     {
-      "matchPackagePatterns": [
-        "^eslint",
-        "^@typescript-eslint/"
-      ],
       "groupName": "ESLint",
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": [
+        "/^eslint/",
+        "/^@typescript-eslint//"
+      ]
     },
     {
-      "matchPackagePatterns": [
-        "^jest",
-        "^@jest/",
-        "^@testing-library/"
-      ],
       "groupName": "Testing",
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": [
+        "/^jest/",
+        "/^@jest//",
+        "/^@testing-library//"
+      ]
     },
     {
       "matchDatasources": [
