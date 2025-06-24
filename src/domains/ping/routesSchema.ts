@@ -6,7 +6,7 @@
 
 import { FastifySchema } from 'fastify'
 
-export const getMessagesSchema: FastifySchema = {
+export const getPingSchema: FastifySchema = {
   querystring: {
     type: 'object',
     properties: {
@@ -15,15 +15,16 @@ export const getMessagesSchema: FastifySchema = {
     },
     required: [],
     additionalProperties: false
-  },
-  // body: {
-  //   type: 'object',
-  //   required: ['fromId', 'toId', 'message'],
-  //   properties: {
-  //     fromId: { type: 'string' },
-  //     toId: { type: 'string' },
-  //     message: { type: 'string' }
-  //   },
-  //   additionalProperties: false
-  // }
+  }
+}
+
+export const postPingSchema: FastifySchema = {
+  body: {
+    type: 'object',
+    required: ['message'],
+    properties: {
+      message: { type: 'string' }
+    },
+    additionalProperties: false
+  }
 }

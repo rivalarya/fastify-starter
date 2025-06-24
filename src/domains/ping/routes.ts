@@ -1,11 +1,16 @@
 import { FastifyInstance, FastifyPluginAsync } from 'fastify'
-import { getPing } from './handler'
-import { getMessagesSchema } from './routesSchema'
+import { getPing, postPing } from './handler'
+import { getPingSchema, postPingSchema } from './routesSchema'
 
 const ping: FastifyPluginAsync = async (fastify: FastifyInstance) => {
   fastify.get('/ping', {
     handler: getPing,
-    schema: getMessagesSchema
+    schema: getPingSchema
+  })
+
+  fastify.post('/ping', {
+    handler: postPing,
+    schema: postPingSchema
   })
 }
 

@@ -20,6 +20,20 @@ describe('Test /ping route', () => {
     })
   })
 
+  it('should return 200 and the correct response', async () => {
+    const response = await request(app.server)
+      .post('/ping')
+      .set('Origin', config.ALLOWED_ORIGIN[0]) // for allowing cors
+      .send({ message: 'Pong' })
+      .expect(200)
+      .expect('Content-Type', /json/)
+
+    expect(response.body).toEqual({
+      data: {},
+      message: 'Pong'
+    })
+  })
+
   afterAll(async () => {
     await app.close()
   })

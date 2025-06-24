@@ -10,6 +10,22 @@ async function getPing (request: FastifyRequest, reply: FastifyReply) {
   reply.send(response)
 }
 
+interface IPostPingBody {
+  message: string
+}
+
+async function postPing (request: FastifyRequest, reply: FastifyReply) {
+  const { message } = request.body as IPostPingBody
+
+  const response: IStandarResponse = {
+    message,
+    data: {},
+  }
+
+  reply.send(response)
+}
+
 export {
-  getPing
+  getPing,
+  postPing
 }
