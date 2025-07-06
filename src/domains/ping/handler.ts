@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
-import IStandardResponse from 'src/types/standarResponse'
+import IStandardResponse from 'src/types/standardResponse'
 
 async function getPing (request: FastifyRequest, reply: FastifyReply) {
   const response: IStandardResponse = {

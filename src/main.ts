@@ -35,7 +35,7 @@ const server = fastify({
 
 import RateLimiter from './middlewares/RateLimiter'
 import CORS from './middlewares/CORS'
-import IStandardResponse from './types/standarResponse'
+import IStandardResponse from './types/standardResponse'
 
 // Apply middlewares
 RateLimiter(server)
