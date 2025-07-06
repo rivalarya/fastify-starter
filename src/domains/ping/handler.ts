@@ -1,8 +1,8 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
-import IStandarResponse from '../standarResponse'
+import IStandardResponse from 'src/types/standarResponse'
 
 async function getPing (request: FastifyRequest, reply: FastifyReply) {
-  const response: IStandarResponse = {
+  const response: IStandardResponse = {
     message: 'Pong',
     data: {},
   }
@@ -17,7 +17,7 @@ interface IPostPingBody {
 async function postPing (request: FastifyRequest, reply: FastifyReply) {
   const { message } = request.body as IPostPingBody
 
-  const response: IStandarResponse = {
+  const response: IStandardResponse = {
     message,
     data: {},
   }

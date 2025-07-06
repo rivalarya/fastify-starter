@@ -35,7 +35,7 @@ const server = fastify({
 
 import RateLimiter from './middlewares/RateLimiter'
 import CORS from './middlewares/CORS'
-import IStandarResponse from './domains/standarResponse'
+import IStandardResponse from './types/standarResponse'
 
 // Apply middlewares
 RateLimiter(server)
@@ -44,7 +44,7 @@ CORS(server)
 // Global error handler
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
   const statusCode = error.statusCode || 500
-  let response: IStandarResponse
+  let response: IStandardResponse
 
   const { validation, validationContext } = error
   if (validation) {
