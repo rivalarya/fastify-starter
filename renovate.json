@@ -7,7 +7,7 @@
   ],
   "automergeType": "pr",
   "schedule": [
-    "on the 1st and 15th day of the month"
+    "on the 1st day of the month"
   ],
   "packageRules": [
     {
