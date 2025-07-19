@@ -43,6 +43,7 @@ CORS(server)
 
 // Global error handler
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
+  request.log.error(error)
   const statusCode = error.statusCode || 500
   let response: IStandardResponse
 
@@ -53,8 +54,10 @@ server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: Fas
       data: validation
     }
   } else {
+    let message = error.message ?? error.name
+    if (config.NODE_ENV === 'production') message = 'An error occured'
     response = {
-      message: error.message || error.name,
+      message,
       data: {}
     }
     return reply.status(statusCode).send(response)
