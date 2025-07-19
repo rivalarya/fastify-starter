@@ -72,6 +72,7 @@ registerAllRoutes(server)
     }, (err: Error | null, address: string) => {
       if (err) {
         server.log.error(err)
+        console.error(err)
         process.exit(1)
       }
 
