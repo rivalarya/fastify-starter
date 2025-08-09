@@ -19,7 +19,7 @@ A modern, robust boilerplate for building RESTful APIs with Fastify and TypeScri
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v18 or higher)
 - npm or yarn
 
 ### Installation
@@ -41,6 +41,14 @@ A modern, robust boilerplate for building RESTful APIs with Fastify and TypeScri
    ```
 
 2. Create a `config.json` file in the root directory with the same structure as `config.example.json`.
+
+### Environment Variables
+
+- `PORT` - Server port (default: 4000)
+- `ENABLE_CORS` - Enable/disable CORS middleware (default: false)
+- `ALLOWED_ORIGIN` - Comma-separated list of allowed origins for CORS
+- `ENABLE_RATE_LIMITER` - Enable/disable rate limiting middleware (default: false)
+- `NODE_ENV` - Environment mode (development/production/test)
 
 ### Running the Application
 
@@ -105,7 +113,6 @@ The application includes a set of custom error classes:
 - `NotFoundError` - 404 Not Found
 
 Example usage:
-
 ```typescript
 import NotFoundError from '../../exceptions/NotFoundError';
 
@@ -117,10 +124,12 @@ if (!user) {
 ## Security Features
 
 ### CORS
+
 CORS is configured in `src/middlewares/CORS.ts`. Set `ENABLE_CORS=true` in your `.env` file to enable it.
 
 ### Rate Limiting
-Rate limiting is implemented to protect against abuse. Default configuration limits each IP to 10 requests per 10 seconds.
+
+Rate limiting is implemented to protect against abuse. Set `ENABLE_RATE_LIMITER=true` in your `.env` file to enable it. Default configuration limits each IP to 10 requests per 10 seconds, with automatic IP banning after 5 consecutive limit violations.
 
 ## Testing
 
@@ -137,7 +146,3 @@ npm test
 ## License
 
 This project is licensed under the MIT License.
-
-## TODO:
-
-- [ ] Should manually add labels `auto-merge` and `dependecies` to repo for auto-merge dependabot can successfully run. Make it automatic.
