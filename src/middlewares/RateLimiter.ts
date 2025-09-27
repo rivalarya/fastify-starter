@@ -22,7 +22,7 @@ export default async function (fastify: FastifyInstance, opts: object = {}) {
     ban: 5,
     onBanReach: (req: FastifyRequest, key: string): void => {
       bannedIps.add(key)
-      console.log(`Ban IP: ${key}`)
+      fastify.log.info(`Ban IP: ${key}`)
     }
   }
 
