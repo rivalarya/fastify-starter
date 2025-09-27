@@ -78,7 +78,7 @@ async function registerVersionedRoutes(
       }
     }
   } catch (error: unknown) {
-    fastify.log.warn(`Version directory ${version} not accessible:`, error)
+    fastify.log.warn({ error }, `Version directory ${version} not accessible:`)
   }
 }
 
