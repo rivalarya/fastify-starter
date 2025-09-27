@@ -1,8 +1,14 @@
-// create folder logs and file http.log on pwd if dont exist
-import * as fs from 'fs'
-const logFilePath = 'logs/http.log'
+// create folder logs if dont exist
+import fs from 'fs'
+import path from 'path'
+const logDirPath = 'logs'
+if (!fs.existsSync(logDirPath)) {
+  fs.mkdirSync(logDirPath)
+}
+
+// create file http.log if dont exist
+const logFilePath = path.join(logDirPath, 'http.log')
 if (!fs.existsSync(logFilePath)) {
-  fs.mkdirSync('logs')
   fs.writeFileSync(logFilePath, '')
 }
 
