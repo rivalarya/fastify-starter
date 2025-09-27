@@ -5,12 +5,14 @@ import { getPingSchema, postPingSchema } from './routesSchema'
 const ping: FastifyPluginAsync = async (fastify: FastifyInstance) => {
   fastify.get('/ping', {
     handler: getPing,
-    schema: getPingSchema
+    schema: getPingSchema,
+    logLevel: 'silent'
   })
 
   fastify.post('/ping', {
     handler: postPing,
-    schema: postPingSchema
+    schema: postPingSchema,
+    logLevel: 'silent'
   })
 }
 
