@@ -14,6 +14,8 @@ FROM node:22-alpine@sha256:cb3143549582cc5f74f26f0992cdef4a422b22128cb517f94173a
 WORKDIR /app
 ENV NODE_ENV=production
 
+RUN apk add --no-cache curl
+
 RUN addgroup --system --gid 1001 fastify-starter
 RUN adduser --system --uid 1001 user
 
