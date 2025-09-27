@@ -1,0 +1,19 @@
+services:
+  fastify-starter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastify-starter
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "7"
+        compress: "true"

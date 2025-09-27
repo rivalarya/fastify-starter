@@ -1,11 +1,3 @@
-// create folder logs and file http.log on pwd if dont exist
-import * as fs from 'fs'
-const logFilePath = 'logs/http.log'
-if (!fs.existsSync(logFilePath)) {
-  fs.mkdirSync('logs')
-  fs.writeFileSync(logFilePath, '')
-}
-
 import fastify, { FastifyError, FastifyReply, FastifyRequest } from 'fastify'
 import { FastifyLoggerOptions } from 'fastify'
 import config from './config/env'
@@ -14,7 +6,6 @@ import { registerAllRoutes } from './utils/routeMapper'
 const server = fastify({
   logger: {
     level: 'info',
-    file: 'logs/http.log',
     serializers: {
       req: (req) => {
         return {
