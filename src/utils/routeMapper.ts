@@ -11,7 +11,6 @@ export async function registerAllRoutes(fastify: FastifyInstance): Promise<void>
 
   try {
     const entries = fs.readdirSync(domainsDir, { withFileTypes: true })
-    console.log('Domain entries:', entries.map(e => e.name))
 
     const versionFolders = entries
       .filter(dirent => dirent.isDirectory() && dirent.name.match(/^v\d+$/))
@@ -21,8 +20,10 @@ export async function registerAllRoutes(fastify: FastifyInstance): Promise<void>
       .filter(dirent => dirent.isDirectory() && !dirent.name.match(/^v\d+$/))
       .map(dirent => dirent.name)
 
-    console.log('Version folders:', versionFolders)
-    console.log('Regular domains:', regularDomains)
+    fastify.log.info(
+      { versionFolders, regularDomains },
+      'Domain entries summary'
+    )
 
     // Register versioned routes if any version folders exist
     if (versionFolders.length > 0) {
@@ -37,7 +38,7 @@ export async function registerAllRoutes(fastify: FastifyInstance): Promise<void>
     }
 
   } catch (error) {
-    fastify.log.error('Failed to read domains directory', error)
+    fastify.log.error({ error }, 'Failed to read domains directory')
     throw error
   }
 }
@@ -71,9 +72,9 @@ async function registerVersionedRoutes(
           prefix: fullPrefix
         })
 
-        console.info(`Registered ${version} routes for domain: ${domain} at ${fullPrefix}`)
+        fastify.log.info(`Registered ${version} routes for domain: ${domain} at ${fullPrefix}`)
       } catch (error) {
-        console.error(`Failed to register ${version} routes for domain: ${domain}`, error)
+        fastify.log.error({ error }, `Failed to register ${version} routes for domain: ${domain}`)
       }
     }
   } catch (error: unknown) {
@@ -102,9 +103,9 @@ async function registerDomainRoutes(
         prefix: domainPrefix
       })
 
-      console.info(`Registered routes for domain: ${domain} at ${domainPrefix || '/'}`)
+      fastify.log.info(`Registered routes for domain: ${domain} at ${domainPrefix || '/'}`)
     } catch (error) {
-      console.error(`Failed to register routes for domain: ${domain}`, error)
+      fastify.log.error({ error }, `Failed to register routes for domain: ${domain}`)
     }
   }
 }

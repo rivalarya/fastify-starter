@@ -34,7 +34,7 @@ CORS(server)
 
 // Global error handler
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
-  request.log.error(error)
+  request.log.error({ error }, 'Unhandled error')
   const statusCode = error.statusCode || 500
   let response: IStandardResponse
 
@@ -65,17 +65,15 @@ registerAllRoutes(server)
       host: '0.0.0.0'
     }, (err: Error | null, address: string) => {
       if (err) {
-        server.log.error(err)
-        console.error(err)
+        server.log.error({ err }, 'Failed to start server')
         process.exit(1)
       }
 
       server.log.info(`Server listening at ${address}`)
-      console.log(`Server listening at ${address}`)
     })
   })
   .catch(err => {
-    server.log.error('Failed to register routes', err)
+    server.log.error({ err }, 'Failed to register routes')
     process.exit(1)
   })
 
