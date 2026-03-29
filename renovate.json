@@ -9,6 +9,13 @@
   "schedule": [
     "on the 1st day of the month"
   ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "schedule": "at any time",
+    "automerge": true,
+    "labels": ["security"]
+  },
+  "osvVulnerabilityAlerts": true,
   "packageRules": [
     {
       "matchUpdateTypes": [
@@ -62,18 +69,6 @@
         "docker"
       ],
       "pinDigests": true
-    },
-    {
-      "matchDepTypes": [
-        "dependencies"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "matchCurrentVersion": "!/^0/",
-      "vulnerabilityAlerts": {
-        "automerge": true
-      }
     }
   ],
   "lockFileMaintenance": {
