@@ -34,7 +34,7 @@ CORS(server)
 
 // Global error handler
 server.setErrorHandler((error: FastifyError, request: FastifyRequest, reply: FastifyReply) => {
-  request.log.error({ error }, 'Unhandled error')
+  request.log.error(error, 'Unhandled error')
   const statusCode = error.statusCode || 500
   let response: IStandardResponse
 
